@@ -1,7 +1,7 @@
 CFC_ClientAddonLoader = CFC_ClientAddonLoader or {}
 CFC_ClientAddonLoader.allowedAddons = CFC_ClientAddonLoader.allowedAddons or {}
 local allowedAddons = CFC_ClientAddonLoader.allowedAddons
-   
+
 allowedAddons["888392108"] = true -- Dark UI
 
 
@@ -11,16 +11,16 @@ local function mountAddon( id )
         if not success then
             print( "[CL ADDON LOADER] Failed mounting gma", id, name )
         end
-        
+
         for _, filename in pairs( files ) do
             if string.match(filename, "^lua/autorun/client/.*%.lua") then
                 print( "[CL ADDON LOADER] filename, running: ", filename )
-                
+
                 local code = file.Read( "lua/autorun/client/cl_cieroskin.lua", "WORKSHOP" )
                 RunString( code, "CFC_ClAddonLoader_" .. filename )
             end
         end
-        
+
     end)
 end
 
@@ -47,12 +47,17 @@ end
 
 function CFC_ClientAddonLoader.loadEnabledAddons()
     local data = file.Read( "cfc_enabled_clientside_addons.json", "DATA" )
-    local lines = strings.Split( data, "\n" )
+    local lines = string.Split( data, "\n" )
     for _, line in pairs( lines ) do
-        local id = strings.Trim( line )
+        local id = string.Trim( line )
         local allowed = allowedAddons[id] and #id > 0
         if allowed then
             CFC_ClientAddonLoader.enableAddon( id )
         end
     end
 end
+
+hook.Add( "Think", "CFC_ClAddonLoader_LoadAddons", function()
+    hook.Remove( "Think", "CFC_ClAddonLoader_LoadAddons" )
+    CFC_ClientAddonLoader.loadEnabledAddons()
+end )
