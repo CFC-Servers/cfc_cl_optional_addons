@@ -39,7 +39,7 @@ end
 
 function CFC_ClientAddonLoader.saveEnabledAddons()
     local f = file.Open( "cfc_enabled_clientside_addons.json", "w", "DATA" )
-    for id, _ in pairs( enabledAddons ) do
+    for id in pairs( enabledAddons ) do
         f:Write( id .. "\n" )
     end
     f:Close()
