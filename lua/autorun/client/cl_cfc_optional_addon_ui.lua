@@ -3,7 +3,7 @@ local checkboxes = {}
 
 local function populatePanel( form )
     -- make checkboxes
-    for id, _ in pairs( CFC_ClientAddonLoader.allowedAddons ) do
+    for id in pairs( CFC_ClientAddonLoader.allowedAddons ) do
         local checkbox = form:CheckBox( "N/A" )
         checkbox.addonId = id
         checkbox:SetChecked( CFC_ClientAddonLoader.enabledAddons[id] == true )
