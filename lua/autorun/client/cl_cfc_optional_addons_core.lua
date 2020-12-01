@@ -16,11 +16,10 @@ local function mountAddon( id )
             if string.match(filename, "^lua/autorun/client/.*%.lua") then
                 print( "[CL ADDON LOADER] filename, running: ", filename )
 
-                local code = file.Read( "lua/autorun/client/cl_cieroskin.lua", "WORKSHOP" )
+                local code = file.Read( filename, "WORKSHOP" )
                 RunString( code, "CFC_ClAddonLoader_" .. filename )
             end
         end
-
     end)
 end
 
