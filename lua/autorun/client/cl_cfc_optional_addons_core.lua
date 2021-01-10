@@ -46,6 +46,7 @@ end
 
 function CFC_ClientAddonLoader.loadEnabledAddons()
     local data = file.Read( "cfc_enabled_clientside_addons.json", "DATA" )
+    if data == nil then return end
     local lines = string.Split( data, "\n" )
     for _, line in pairs( lines ) do
         local id = string.Trim( line )
