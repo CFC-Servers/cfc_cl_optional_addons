@@ -30,11 +30,11 @@ local function populatePanel( form )
     form:Help( "* Restart is required when disabling addons" )
 end
 
-hook.Add( "AddToolMenuCategories", "CFC_HTTP_ListManager", function()
+hook.Add( "AddToolMenuCategories", "CFC_OptionalAddons_AddMenuCategory", function()
     spawnmenu.AddToolCategory( "Options", "OptionalAddons", "Optional Addons" )
 end )
 
-hook.Add( "PopulateToolMenu", "CFC_HTTP_ListManager", function()
+hook.Add( "PopulateToolMenu", "CFC_OptionalAddons_CreateOptionsMenu", function()
     spawnmenu.AddToolMenuOption( "Options", "OptionalAddons", "optional_addons", "OptionalAddons", "", "", function( panel )
         populatePanel( panel )
     end )
