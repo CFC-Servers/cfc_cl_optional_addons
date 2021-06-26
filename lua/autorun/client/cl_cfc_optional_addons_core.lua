@@ -2,8 +2,9 @@ CFC_ClientAddonLoader = CFC_ClientAddonLoader or {}
 CFC_ClientAddonLoader.allowedAddons = CFC_ClientAddonLoader.allowedAddons or {}
 local allowedAddons = CFC_ClientAddonLoader.allowedAddons
 
-allowedAddons["888392108"] = true -- Dark UI
-
+allowedAddons["888392108"] = true -- Dark UI https://steamcommunity.com/sharedfiles/filedetails/?id=888392108
+allowedAddons["127986968"] = true -- Explosion Effect https://steamcommunity.com/sharedfiles/filedetails/?id=127986968
+allowedAddons["1974573989"] = true -- Automatic Player Looking https://steamcommunity.com/sharedfiles/filedetails/?id=1974573989
 
 local function mountAddon( id )
     steamworks.DownloadUGC( id, function( name )
