@@ -4,7 +4,7 @@ local allowedAddons = CFC_ClientAddonLoader.allowedAddons
 
 allowedAddons["888392108"] = true -- Dark UI https://steamcommunity.com/sharedfiles/filedetails/?id=888392108
 allowedAddons["127986968"] = true -- Explosion Effect https://steamcommunity.com/sharedfiles/filedetails/?id=127986968
-allowedAddons["1974573989"] = true -- Automatic Player Looking https://steamcommunity.com/sharedfiles/filedetails/?id=1974573989
+allowedAddons["246363312"] = true -- Cookie Clicker https://steamcommunity.com/sharedfiles/filedetails/?id=246363312
 
 local function mountAddon( id )
     steamworks.DownloadUGC( id, function( name )
