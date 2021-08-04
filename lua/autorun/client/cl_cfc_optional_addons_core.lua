@@ -6,7 +6,7 @@ allowedAddons["888392108"] = true -- Dark UI https://steamcommunity.com/sharedfi
 allowedAddons["246363312"] = true -- Cookie Clicker https://steamcommunity.com/sharedfiles/filedetails/?id=246363312
 allowedAddons["2251170323"] = true -- Chatping https://steamcommunity.com/sharedfiles/filedetails/?id=2251170323
 allowedAddons["1621144907"] = true -- 2048 Game https://steamcommunity.com/sharedfiles/filedetails/?id=1621144907
-
+allowedAddons["2018524991"] = true -- Incredible DebugScreen https://steamcommunity.com/sharedfiles/filedetails/?id=2018524991
 
 local function mountAddon( id )
     steamworks.DownloadUGC( id, function( name )
