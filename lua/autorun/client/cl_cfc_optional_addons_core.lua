@@ -15,7 +15,7 @@ local function mountAddon( id )
 
         for _, filename in pairs( files ) do
             local isAutorun = string.match( filename, "^lua/autorun/.*%.lua" )
-            local isServer = string.match( filename, "^lua/autorun/server.*%.lua" )
+            local isServer = string.StartWith( filename, "lua/autorun/server" )
             if isAutorun and not isServer then
                 print( "[CL ADDON LOADER] filename, running: ", filename )
 
