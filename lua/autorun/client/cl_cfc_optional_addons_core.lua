@@ -4,10 +4,7 @@ local allowedAddons = CFC_ClientAddonLoader.allowedAddons
 
 allowedAddons["888392108"] = true -- Dark UI https://steamcommunity.com/sharedfiles/filedetails/?id=888392108
 allowedAddons["246363312"] = true -- Cookie Clicker https://steamcommunity.com/sharedfiles/filedetails/?id=246363312
-allowedAddons["2251170323"] = true -- Chatping https://steamcommunity.com/sharedfiles/filedetails/?id=2251170323
 allowedAddons["1621144907"] = true -- Prop info hud https://steamcommunity.com/sharedfiles/filedetails/?id=2573011318
-
-
 
 local function mountAddon( id )
     steamworks.DownloadUGC( id, function( name )
@@ -17,11 +14,13 @@ local function mountAddon( id )
         end
 
         for _, filename in pairs( files ) do
-            if string.match(filename, "^lua/autorun/client/.*%.lua") then
+            local isAutorun = string.match( filename, "^lua/autorun/.*%.lua" )
+            local isServer = string.StartWith( filename, "lua/autorun/server" )
+            if isAutorun and not isServer then
                 print( "[CL ADDON LOADER] filename, running: ", filename )
 
                 local code = file.Read( filename, "WORKSHOP" )
-                RunString( code, "CFC_ClAddonLoader_" .. filename )
+                RunString( code, "CFC_ClAddonLoader_" .. id )
             end
         end
     end)
