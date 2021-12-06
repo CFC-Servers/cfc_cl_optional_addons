@@ -31,11 +31,11 @@ local function populatePanel( form )
 end
 
 hook.Add( "AddToolMenuCategories", "CFC_OptionalAddons_AddMenuCategory", function()
-    spawnmenu.AddToolCategory( "Options", "OptionalAddons", "Optional Addons" )
+    spawnmenu.AddToolCategory( "Options", "CFC", "CFC" )
 end )
 
 hook.Add( "PopulateToolMenu", "CFC_OptionalAddons_CreateOptionsMenu", function()
-    spawnmenu.AddToolMenuOption( "Options", "OptionalAddons", "optional_addons", "OptionalAddons", "", "", function( panel )
+    spawnmenu.AddToolMenuOption( "Options", "CFC", "optional_addons", "OptionalAddons", "", "", function( panel )
         populatePanel( panel )
     end )
 end )
