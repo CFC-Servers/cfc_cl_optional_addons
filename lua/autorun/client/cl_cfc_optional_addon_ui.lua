@@ -21,7 +21,7 @@ local function mountAddon( id )
                 print( "[CL ADDON LOADER] filename, running: ", filename )
 
                 local code = file.Read( filename, "WORKSHOP" )
-                RunString( code, "CFC_ClAddonLoader_" .. id )
+                RunString( code, "CFC_ClAddonLoader_" .. id .. ".lua")
             end
         end
     end)
