@@ -7,7 +7,6 @@ allowedAddons["246363312"] = true -- Cookie Clicker https://steamcommunity.com/s
 allowedAddons["1621144907"] = true -- Prop info hud https://steamcommunity.com/sharedfiles/filedetails/?id=2573011318
 allowedAddons["1452363997"] = true -- compass https://steamcommunity.com/sharedfiles/filedetails/?id=1452363997
 allowedAddons["1805621283"] = true -- dynamic 3d hud https://steamcommunity.com/sharedfiles/filedetails/?id=1805621283
-allowedAddons["2954934766"] = true -- half life customizable hud https://steamcommunity.com/sharedfiles/filedetails/?id=2954934766
 
 local function mountAddon( id )
     steamworks.DownloadUGC( id, function( name )
