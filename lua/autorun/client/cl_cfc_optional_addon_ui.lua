@@ -2,7 +2,7 @@ CFC_ClientAddonLoader = CFC_ClientAddonLoader or {}
 CFC_ClientAddonLoader.allowedAddons = CFC_ClientAddonLoader.allowedAddons or {}
 local allowedAddons = CFC_ClientAddonLoader.allowedAddons
 
--- allowedAddons["888392108"] = true -- Dark UI https://steamcommunity.com/sharedfiles/filedetails/?id=888392108
+allowedAddons["888392108"] = true -- Dark UI https://steamcommunity.com/sharedfiles/filedetails/?id=888392108
 allowedAddons["246363312"] = true -- Cookie Clicker https://steamcommunity.com/sharedfiles/filedetails/?id=246363312
 allowedAddons["1621144907"] = true -- Prop info hud https://steamcommunity.com/sharedfiles/filedetails/?id=2573011318
 allowedAddons["1452363997"] = true -- compass https://steamcommunity.com/sharedfiles/filedetails/?id=1452363997
@@ -22,10 +22,10 @@ local function mountAddon( id )
                 print( "[CL ADDON LOADER] filename, running: ", filename )
 
                 local code = file.Read( filename, "WORKSHOP" )
-                RunString( code, "CFC_ClAddonLoader_" .. id .. ".lua")
+                RunString( code, "CFC_ClAddonLoader_" .. id .. ".lua" )
             end
         end
-    end)
+    end )
 end
 
 CFC_ClientAddonLoader.enabledAddons = CFC_ClientAddonLoader.enabledAddons or {}
@@ -96,6 +96,7 @@ local function populatePanel( form )
         end
         CFC_ClientAddonLoader.saveEnabledAddons()
     end
+
     form:Help( "* Restart is required when disabling addons" )
 end
 
