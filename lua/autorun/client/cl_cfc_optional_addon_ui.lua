@@ -29,42 +29,36 @@ local function removeLayer( fileName )
 end
 
 local oldInclude = oldInclude or include
-include = function( fileName )
-    -- print( "including " .. fileName )
-    local info = debug.getinfo( 2 )
-    if string.StartsWith( info.short_src, "CFC_ClAddonLoader" ) then
-        -- TODO: Make sure that the bit below actually handles .. correctly
-        local isTraversing = fileName:find( "%.%." ) ~= nil
-        if isTraversing then
-            local addonDirectory = debug.getinfo( 2, "S" ).source:sub( 2 )
-            addonDirectory = addonDirectory:gsub( "[^/]+/", "", 3 )
-            addonDirectory = addonDirectory:gsub( "/[^/]+$", "" )
-            fileName = normalizePath( string.format( "%s/%s", addonDirectory, fileName ) )
-        end
-        -- print( __CFCLoaderLocalPath )
-        local code = file.Read( fileName, "WORKSHOP" )
-        if code then
-            print( "[CL ADDON LOADER] filename, including: ", fileName )
-            local oldPath = __CFCLoaderLocalPath
-            __CFCLoaderLocalPath = removeLayer( fileName )
-            RunString( code, "CFC_ClAddonLoader_" .. fileName )
-            __CFCLoaderLocalPath = oldPath
-            return
-        end
-        fileName = __CFCLoaderLocalPath .. fileName
-        code = file.Read( fileName, "WORKSHOP" )
-        if code then
-            print( "[CL ADDON LOADER] filename, including: ", fileName )
-            local oldPath = __CFCLoaderLocalPath
-            __CFCLoaderLocalPath = removeLayer( fileName )
-            RunString( code, "CFC_ClAddonLoader_" .. fileName )
-            __CFCLoaderLocalPath = oldPath
-            return
-        end
-        print( "[CL ADDON LOADER] Failed including " .. fileName )
-    else
-        oldInclude( fileName )
+local newInclude = function( fileName )
+    -- TODO: Make sure that the bit below actually handles .. correctly
+    local isTraversing = fileName:find( "%.%." ) ~= nil
+    if isTraversing then
+        local addonDirectory = debug.getinfo( 2, "S" ).source:sub( 2 )
+        addonDirectory = addonDirectory:gsub( "[^/]+/", "", 3 )
+        addonDirectory = addonDirectory:gsub( "/[^/]+$", "" )
+        fileName = normalizePath( string.format( "%s/%s", addonDirectory, fileName ) )
     end
+    -- print( __CFCLoaderLocalPath )
+    local code = file.Read( fileName, "WORKSHOP" )
+    if code then
+        print( "[CL ADDON LOADER] filename, including: ", fileName )
+        local oldPath = __CFCLoaderLocalPath
+        __CFCLoaderLocalPath = removeLayer( fileName )
+        RunString( code, "CFC_ClAddonLoader_" .. fileName )
+        __CFCLoaderLocalPath = oldPath
+        return
+    end
+    fileName = __CFCLoaderLocalPath .. fileName
+    code = file.Read( fileName, "WORKSHOP" )
+    if code then
+        print( "[CL ADDON LOADER] filename, including: ", fileName )
+        local oldPath = __CFCLoaderLocalPath
+        __CFCLoaderLocalPath = removeLayer( fileName )
+        RunString( code, "CFC_ClAddonLoader_" .. fileName )
+        __CFCLoaderLocalPath = oldPath
+        return
+    end
+    print( "[CL ADDON LOADER] Failed including " .. fileName )
 end
 
 local function validFile( filename )
@@ -80,6 +74,7 @@ local function mountAddon( id )
             print( "[CL ADDON LOADER] Failed mounting gma", id, name )
         end
 
+        include = newInclude
         for _, filename in pairs( files ) do
             if validFile( filename ) then
                 print( "[CL ADDON LOADER] filename, running: ", filename )
@@ -89,6 +84,7 @@ local function mountAddon( id )
                 RunString( code, "CFC_ClAddonLoader_" .. id .. ".lua" )
             end
         end
+        include = oldInclude
     end )
 end
 
