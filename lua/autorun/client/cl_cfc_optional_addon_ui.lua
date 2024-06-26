@@ -8,7 +8,7 @@ allowedAddons["1621144907"] = true -- Prop info hud https://steamcommunity.com/s
 allowedAddons["1452363997"] = true -- compass https://steamcommunity.com/sharedfiles/filedetails/?id=1452363997
 allowedAddons["1805621283"] = true -- dynamic 3d hud https://steamcommunity.com/sharedfiles/filedetails/?id=1805621283
 
-__CFCLoaderLocalPath = ""
+local __CFCLoaderLocalPath = ""
 
 local function normalizePath(path)
     local parts = {}
@@ -39,7 +39,7 @@ local newInclude = function( fileName )
         fileName = normalizePath( string.format( "%s/%s", addonDirectory, fileName ) )
     end
     -- print( __CFCLoaderLocalPath )
-    local code = file.Read( fileName, "WORKSHOP" )
+    local code = file.Read( "lua/" .. fileName, "WORKSHOP" ) -- Try to include absolute path
     if code then
         print( "[CL ADDON LOADER] filename, including: ", fileName )
         local oldPath = __CFCLoaderLocalPath
@@ -49,7 +49,7 @@ local newInclude = function( fileName )
         return
     end
     fileName = __CFCLoaderLocalPath .. fileName
-    code = file.Read( fileName, "WORKSHOP" )
+    code = file.Read( fileName, "WORKSHOP" ) -- Try to include local path
     if code then
         print( "[CL ADDON LOADER] filename, including: ", fileName )
         local oldPath = __CFCLoaderLocalPath
