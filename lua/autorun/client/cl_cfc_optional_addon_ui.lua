@@ -9,6 +9,9 @@ allowedAddons["1452363997"] = true -- compass https://steamcommunity.com/sharedf
 allowedAddons["1805621283"] = true -- dynamic 3d hud https://steamcommunity.com/sharedfiles/filedetails/?id=1805621283
 
 local function mountAddon( id )
+    if HotLoad then
+        return HotLoad.LoadAddon( id )
+    end
     steamworks.DownloadUGC( id, function( name )
         local success, files = game.MountGMA( name )
         if not success then
